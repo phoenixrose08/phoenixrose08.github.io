@@ -3,9 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Phoenix Website</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            color: #00ff00;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #333;
+            border: none;
+            color: #00ff00;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #00ff00;
+            color: #333;
+        }
+        .ip-address {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
 </head>
 <body>
-    <h1> Phoenix's Website </h1>
+    <h1>Phoenix's Website</h1>
+    
+    <button class="button">HRT</button>
+    <button class="button">Socials</button>
+    <button class="button">Projects</button>
+    
+    <div class="ip-address">
+        <?php
+            function get_client_ip() {
+                $ip_address = '';
+                if (isset($_SERVER['HTTP_CLIENT_IP']))
+                    $ip_address = $_SERVER['HTTP_CLIENT_IP'];
+                else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+                    $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                else if(isset($_SERVER['HTTP_X_FORWARDED']))
+                    $ip_address = $_SERVER['HTTP_X_FORWARDED'];
+                else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+                    $ip_address = $_SERVER['HTTP_FORWARDED_FOR'];
+                else if(isset($_SERVER['HTTP_FORWARDED']))
+                    $ip_address = $_SERVER['HTTP_FORWARDED'];
+                else if(isset($_SERVER['REMOTE_ADDR']))
+                    $ip_address = $_SERVER['REMOTE_ADDR'];
+                else
+                    $ip_address = 'UNKNOWN';
+                return $ip_address;
+            }
+            $client_ip = get_client_ip();
+            echo "Your IP Address: " . $client_ip;
+        ?>
+    </div>
+
 </body>
 </html>
